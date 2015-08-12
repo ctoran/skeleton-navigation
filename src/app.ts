@@ -2,6 +2,8 @@ import 'bootstrap';
 import 'bootstrap/css/bootstrap.css!';
 
 export class App {
+  router: any;
+ 
   configureRouter(config, router){
     config.title = 'Aurelia';
     config.map([

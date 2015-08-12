@@ -7,12 +7,21 @@ var sourcemaps = require('gulp-sourcemaps');
 var paths = require('../paths');
 var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
+var ts = require('gulp-typescript');
+var tsProject = ts.createProject('tsconfig.json');
+
+gulp.task('build-ts', function() {
+    var tsResult = gulp.src([paths.tsSource, paths.jspmDefinitions])
+      .pipe(ts(tsProject));
+
+    return tsResult.js.pipe(gulp.dest(paths.root));
+});
 
 // transpiles changed es6 files to SystemJS format
 // the plumber() call prevents 'pipe breaking' caused
 // by errors from other gulp plugins
 // https://www.npmjs.com/package/gulp-plumber
-gulp.task('build-system', function () {
+gulp.task('build-js', function () {
   return gulp.src(paths.source)
     .pipe(plumber())
     .pipe(changed(paths.output, {extension: '.js'}))
@@ -20,6 +29,14 @@ gulp.task('build-system', function () {
     .pipe(to5(assign({}, compilerOptions, {modules:'system'})))
     .pipe(sourcemaps.write({includeContent: true}))
     .pipe(gulp.dest(paths.output));
+});
+
+gulp.task('build-system', function(callback) {
+  return runSequence(
+    'build-ts',
+    'build-js',
+    callback
+  );
 });
 
 // copies changed html files to the output directory

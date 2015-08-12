@@ -2,9 +2,12 @@ var path = require('path');
 
 var appRoot = 'src/';
 var outputRoot = 'dist/';
+var packageRoot = 'jspm_packages/';
 
 module.exports = {
   root: appRoot,
+  tsSource: appRoot + '**/*.ts',
+  jspmDefinitions: packageRoot + '**/*.d.ts',
   source: appRoot + '**/*.js',
   html: appRoot + '**/*.html',
   style: 'styles/**/*.css',
