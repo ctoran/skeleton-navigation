@@ -11,7 +11,7 @@ var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json');
 
 gulp.task('build-ts', function() {
-    var tsResult = gulp.src([paths.tsSource, paths.jspmDefinitions])
+    var tsResult = gulp.src([paths.tsSource, paths.jspmDefinitions, paths.typings])
       .pipe(ts(tsProject));
 
     return tsResult.js.pipe(gulp.dest(paths.root));
