@@ -1,4 +1,6 @@
 export class App {
+  router: any;
+ 
   configureRouter(config, router){
     config.title = 'Aurelia';
     config.map([

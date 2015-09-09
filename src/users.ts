@@ -4,6 +4,7 @@ import 'fetch';
 
 @inject(HttpClient)
 export class Users{
+  http: HttpClient;
   heading = 'Github Users';
   users = [];
 
