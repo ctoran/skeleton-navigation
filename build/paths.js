@@ -12,6 +12,7 @@ module.exports = {
   typings: typingsRoot + '**/*.d.ts',
   source: appRoot + '**/*.js',
   html: appRoot + '**/*.html',
+  css: appRoot + '**/*.css',
   style: 'styles/**/*.css',
   output: outputRoot,
   doc:'./doc',
