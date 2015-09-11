@@ -23,7 +23,7 @@ gulp.task('build-system', function(callback) {
 
 // gulp-typescript compiles TS files directly into ES5
 gulp.task('build-ts', function () {
-  var tsResult = gulp.src([paths.tsSource, paths.jspmDefinitions, paths.typings])
+  var tsResult = gulp.src([paths.tsSource, paths.tsxSource, paths.jspmDefinitions, paths.typings])
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject));
   return tsResult.js
