@@ -1,4 +1,4 @@
 ﻿declare module "core-js" {
-	export var core;
+	export var core: any;
 	export default core;
 }

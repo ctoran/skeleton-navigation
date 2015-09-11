@@ -1,12 +1,14 @@
-export class ChildRouter{
-  router: any;
-  heading = 'Child Router';
+import {AureliaApp} from 'aurelia-app';
+import {Router, RouterConfiguration} from 'aurelia-router';
 
-  configureRouter(config, router){
+export class ChildRouter implements AureliaApp {
+  router: Router;
+
+  configureRouter(config: RouterConfiguration, router: Router) {
     config.map([
-      { route: ['','welcome'],  name: 'welcome',       moduleId: 'welcome',       nav: true, title:'Welcome' },
-      { route: 'users',         name: 'users',         moduleId: 'users',         nav: true, title:'Github Users' },
-      { route: 'child-router',  name: 'child-router',  moduleId: 'child-router',  nav: true, title:'Child Router' }
+      { route: ['','welcome'], name: 'welcome',      moduleId: 'welcome',      nav: true, title:'Welcome' },
+      { route: 'users',        name: 'users',        moduleId: 'users',        nav: true, title:'Github Users' },
+      { route: 'child-router', name: 'child-router', moduleId: 'child-router', nav: true, title:'Child Router' }
     ]);
 
     this.router = router;

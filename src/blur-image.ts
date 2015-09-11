@@ -2,16 +2,16 @@ import {inject} from 'aurelia-framework';
 
 @inject(Element)
 export class BlurImageCustomAttribute {
-	element: Element;
-	
-  constructor(element){
+	element: HTMLCanvasElement;
+
+  constructor(element: HTMLCanvasElement) {
     this.element = element;
   }
 
-  valueChanged(newImage){
-    if(newImage.complete){
+  valueChanged(newImage: HTMLImageElement) {
+    if (newImage.complete) {
       drawBlur(this.element, newImage);
-    } else{
+    } else {
       newImage.onload = () => drawBlur(this.element, newImage);
     }
   }
@@ -101,13 +101,13 @@ var shg_table = [
 
 var BLUR_RADIUS = 40;
 
-function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
+function stackBlurCanvasRGBA( canvas: HTMLCanvasElement, top_x: number, top_y: number, width: number, height: number, radius: number )
 {
 	if ( isNaN(radius) || radius < 1 ) return;
 	radius |= 0;
 
 	var context = canvas.getContext("2d");
-	var imageData;
+	var imageData: ImageData;
 
 	try {
 	  imageData = context.getImageData( top_x, top_y, width, height );
@@ -117,10 +117,10 @@ function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
 
 	var pixels = imageData.data;
 
-	var x, y, i, p, yp, yi, yw, r_sum, g_sum, b_sum, a_sum,
-	r_out_sum, g_out_sum, b_out_sum, a_out_sum,
-	r_in_sum, g_in_sum, b_in_sum, a_in_sum,
-	pr, pg, pb, pa, rbs;
+	var x: number, y: number, i: number, p: number, yp: number, yi: number, yw: number, r_sum: number, g_sum: number, b_sum: number, a_sum: number,
+	r_out_sum: number, g_out_sum: number, b_out_sum: number, a_out_sum: number,
+	r_in_sum: number, g_in_sum: number, b_in_sum: number, a_in_sum: number,
+	pr: number, pg: number, pb: number, pa: number, rbs: number;
 
 	var div = radius + radius + 1;
 	var w4 = width << 2;
@@ -137,8 +137,8 @@ function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
 		if ( i == radiusPlus1 ) var stackEnd = stack;
 	}
 	stack.next = stackStart;
-	var stackIn = null;
-	var stackOut = null;
+	var stackIn: BlurStack = null;
+	var stackOut: BlurStack = null;
 
 	yw = yi = 0;
 
@@ -350,16 +350,16 @@ function stackBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius )
 
 }
 
-function BlurStack()
+class BlurStack
 {
-	this.r = 0;
-	this.g = 0;
-	this.b = 0;
-	this.a = 0;
-	this.next = null;
+	r: number = 0;
+	g: number = 0;
+	b: number = 0;
+	a: number = 0;
+	next: BlurStack = null;
 }
 
-function drawBlur(canvas, image) {
+function drawBlur(canvas: HTMLCanvasElement, image: HTMLImageElement) {
   var w = canvas.width;
   var h = canvas.height;
   var canvasContext = canvas.getContext('2d');

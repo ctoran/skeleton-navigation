@@ -3,6 +3,12 @@
 // Definitions by: Ryan Graham <https://github.com/ryan-codingintrigue>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
+// @cmichaelgraham - removed explicit external reference
+
+// @cmichaelgraham - added BufferSource and URLSearchParams interfaces to help compilation
+interface BufferSource {}
+interface URLSearchParams {}
+
 declare class Request {
 	constructor(input: string|Request, init?:RequestInit);
 	method: string;
