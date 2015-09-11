@@ -9,17 +9,8 @@ var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
 var notify = require("gulp-notify");
 var ts = require('gulp-typescript');
-//var tsProject = ts.createProject('tsconfig.json');
-
-var tsProject = ts.createProject({
-  // typescript: require('typescript'),
-  declarationFiles: false,
-  noExternalResolve: true,
-  target: "es5",
-  module: "amd",
-  outDir: paths.out,
-  emitDecoratorMetadata: true,
-  experimentalDecorators: true
+var tsProject = ts.createProject('tsconfig.json', {
+  typescript: require('typescript'),
 });
 
 gulp.task('build-system', function(callback) {
